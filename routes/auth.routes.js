@@ -33,7 +33,7 @@ router.post('/signup', (req, res, next) => {
     return
   }
 
-  This regular expression checks password for special characters and minimum length
+  // This regular expression checks password for special characters and minimum length
   const passwordRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/
   if (!passwordRegex.test(password)) {
     res.status(400).json({
