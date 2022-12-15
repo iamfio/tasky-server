@@ -6,18 +6,33 @@ const PORT = process.env.PORT || 5005;
 
 mongoose.set("strictQuery", false);
 
-const mongoConnect = async () => {
-  try {
-    const conn = await mongoose.connect(process.env.MONGO_URI);
-    console.log(`MongoDB Connected: ${conn.connection.host}`);
-  } catch (error) {
-    console.log(error);
-    process.exit(1);
-  }
-};
+// const mongoConnect = async () => {
+//   try {
+//     const conn = await mongoose.connect(process.env.MONGO_URI);
+//     console.log(`MongoDB Connected: ${conn.connection.host}`);
+//   } catch (error) {
+//     console.log(error);
+//     process.exit(1);
+//   }
+// };
 
-mongoConnect().then(() => {
-  app.listen(PORT, () => {
-    console.log(`Server listening on http://localhost:${PORT}`);
+// mongoConnect().then(() => {
+//   app.listen(PORT, () => {
+//     console.log(`Server listening on http://localhost:${PORT}`);
+//   });
+// });
+
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then((x) => {
+    const dbName = x.connections[0].name;
+    console.log(`Connected to Mongo! Database name: "${dbName}"`);
+  })
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`Server listening on http://localhost:${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error("Error connecting to mongo: ", err);
   });
-});
