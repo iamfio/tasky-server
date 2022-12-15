@@ -32,12 +32,15 @@ const MONGO_URI = process.env.MONGO_URI;
 //     });
 // };
 
-export const mongoConnect = async () => {
-  try {
-    const conn = await mongoose.connect(process.env.MONGO_URI);
-    console.log(`MongoDB Connected: ${conn.connection.host}`);
-  } catch (error) {
-    console.log(error);
-    process.exit(1);
-  }
-}
+// export const mongoConnect = async () => {
+// mongoose.set("strictQuery", false);
+// const mongoose = require("mongoose");
+
+//   try {
+//     const conn = await mongoose.connect(process.env.MONGO_URI);
+//     console.log(`MongoDB Connected: ${conn.connection.host}`);
+//   } catch (error) {
+//     console.log(error);
+//     process.exit(1);
+//   }
+// }
