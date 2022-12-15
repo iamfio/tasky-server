@@ -7,13 +7,15 @@ const PORT = process.env.PORT || 5005;
 
 mongoose.set("strictQuery", false);
 
-try {
-  const conn = await mongoose.connect(process.env.MONGO_URI);
-  console.log(`MongoDB Connected: ${conn.connection.host}`);
-} catch (error) {
-  console.log(error);
-  process.exit(1);
-}
+const mongoConnect = async () => {
+  try {
+    const conn = await mongoose.connect(process.env.MONGO_URI);
+    console.log(`MongoDB Connected: ${conn.connection.host}`);
+  } catch (error) {
+    console.log(error);
+    process.exit(1);
+  }
+};
 
 mongoConnect().then(() => {
   app.listen(PORT, () => {
